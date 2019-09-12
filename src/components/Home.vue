@@ -1,7 +1,12 @@
 <template>
   <div class="index-container">
-    <h1><strong>胖番茄网</strong> -- <em>英语四级单词训练</em></h1>
-    
+    <h1><strong>胖番茄网</strong> -- <em>老友记台词训练</em></h1>
+    <div v-for="outerItem in seasons">
+      <h3>第{{outerItem}}季</h3>
+      <ul>
+        <li v-for="innerItem in episode" @click="go(outerItem,innerItem)">第{{innerItem}}集</li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -23,7 +28,8 @@ export default {
   data () {
     return {
         
-
+      seasons:10,
+      episode:24
 
 
     }
@@ -43,16 +49,34 @@ export default {
     
   },
   methods: {
-   
+    go : function(season,episode){
+      var that = this;
+      that.$router.push({ name: 'show', params: { season:season,episode:episode}})
+      
+    },
   }
 }
 </script>
-<style lang="less">
 
-</style>
 <style lang="less" scoped>
-@import '~vux/src/styles/1px.less';
-@import '~vux/src/styles/center.less';
-@import '../css/common.css';
-
+  .index-container{
+    padding:10px;
+  }
+  ul{
+    overflow:hidden;
+  }
+  ul li{
+    float:left;
+    margin:10px;
+    list-style:none;
+  }
+  h1{
+    font-size:18px;
+  }
+  h3{
+    font-size:16px;
+  }
+  em{
+    font-style:normal;
+  }
 </style>
